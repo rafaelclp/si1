@@ -93,7 +93,7 @@ public class NumeroPorExtenso {
 				// adiciona-se um conectivo (e); em qualquer outro caso, adiciona-se uma vírgula.
 				// Fonte: http://www.matematicadidatica.com.br/CalculadoraNumerosDecimaisPorExtenso.aspx
 				// como no exemplo do documento não foi usada a vírgula, "Oito mil setecentos e sessenta e oito",
-				// deixaremos apenas o espaço para esses casos.
+				// deixaremos apenas o espaço para esses casos. Caso queira a vírgula, ponha um "else" inserindo-a
 				if (numeroAposSufixo < 100) {
 					resultado = " e" + resultado;
 				}
@@ -106,6 +106,7 @@ public class NumeroPorExtenso {
 				// nesse caso, não se insere o "um" (por exemplo: "um mil")
 				// Fonte 1: http://answers.yahoo.com/question/index?qid=20061011124154AAHjUj3
 				// Fonte 2: http://www.brasilescola.com/gramatica/um-mil-ou-mil.htm
+				// caso queira permitir o "um" para qualquer sufixo, tire a atribuição para fora do if
 				if (!sufixoSingular.equals(sufixoPlural)) {
 					resultado = converterDigito(1) + " " + resultado;
 				}
@@ -119,7 +120,7 @@ public class NumeroPorExtenso {
 	}
 
 	/**
-	 * Converte números de até 1 bilhão para extenso.
+	 * Converte números de até alguns bilhões para extenso (é o máximo para um int 32 bits).
 	 * @param numero Número a ser convertido.
 	 * @return Número convertido para extenso.
 	 * @throws Exception Caso o número não esteja dentro do intervalo (0-1000000000)
@@ -135,7 +136,7 @@ public class NumeroPorExtenso {
 		numero /= 1000;
 
 		// Trata dos outros digitos
-		String[] sufixos = {"mil","mil"};
+		String[] sufixos = {"mil","mil", "milhão","milhões", "bilhão","bilhões"};
 		int sufixo = 0;
 		while (numero > 0 && sufixo+1 < sufixos.length) {
 			if (numero%1000 != 0) {
@@ -153,15 +154,15 @@ public class NumeroPorExtenso {
 	 * @param numero Número a ser convertido.
 	 * @return Número convertido para extenso.
 	 */
-	public static String converter(int numero) {
-		try {
-			if (numero == 0) {
-				return converterDigito(0);
-			}
-			return converterNumeroQualquerPositivo(numero);
-		} catch (Exception e) {
-			System.err.println(e.getMessage());
+	public static String converter(int numero) throws Exception {
+		String resultado = "";
+		if (numero > 1000000000) {
+			throw new Exception("O número não deve passar de um bilhão.");
+		} else if (numero == 0) {
+			resultado = converterDigito(0);
+		} else {
+			resultado = converterNumeroQualquerPositivo(numero);
 		}
-		return "";
+		return resultado;
 	}
 }

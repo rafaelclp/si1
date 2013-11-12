@@ -19,5 +19,6 @@ public class InterfaceDeUsuario {
 				System.out.println("Voce deve digitar um numero (de 0 a 1 bilhao). Digite novamente.");
 			}
 		} while (true);
+		in.close();
 	}
 }
