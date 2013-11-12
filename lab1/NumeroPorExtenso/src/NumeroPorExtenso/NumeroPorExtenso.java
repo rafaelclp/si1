@@ -72,15 +72,95 @@ public class NumeroPorExtenso {
 	}
 
 	/**
+	 * Converte um número (positivo) parcial de até digitos com sufixo (mil, milhão, bilhão) para extenso.
+	 * @param numero Número de até 3 digitos a ser convertido.
+	 * @param sufixoSingular Sufixo caso "numero" seja 1.
+	 * @param sufixoPlural Sufixo caso "numero" seja diferente de 1.
+	 * @param numeroAposSufixo Número que será inserido após o sufixo do número (não é inserido neste método).
+	 * @return Número convertido para extenso.
+	 * @throws Exception Caso o número não esteja no intervalo de 1 a 999.
+	 */
+	private static String converterNumeroParcialDeAte3DigitosComSufixo(int numero, String sufixoSingular, String sufixoPlural, int numeroAposSufixo)
+			throws Exception {
+		String resultado = "";
+
+		if (numero > 0 && numero < 1000) {
+			// se existe algum número após o sufixo a ser adicionado, insere um separador ( )
+			if (numeroAposSufixo != 0) {
+				resultado = " ";
+
+				// se os 3 digitos após os sufixo têm só os últimos dois dígitos diferentes de 0,
+				// adiciona-se um conectivo (e); em qualquer outro caso, adiciona-se uma vírgula.
+				// Fonte: http://www.matematicadidatica.com.br/CalculadoraNumerosDecimaisPorExtenso.aspx
+				// como no exemplo do documento não foi usada a vírgula, "Oito mil setecentos e sessenta e oito",
+				// deixaremos apenas o espaço para esses casos.
+				if (numeroAposSufixo < 100) {
+					resultado = " e" + resultado;
+				}
+			}
+
+			if (numero == 1) {
+				resultado = sufixoSingular + resultado;
+
+				// se o sufixo singular é igual ao plural, então o sufixo só tem forma no plural;
+				// nesse caso, não se insere o "um" (por exemplo: "um mil")
+				// Fonte 1: http://answers.yahoo.com/question/index?qid=20061011124154AAHjUj3
+				// Fonte 2: http://www.brasilescola.com/gramatica/um-mil-ou-mil.htm
+				if (!sufixoSingular.equals(sufixoPlural)) {
+					resultado = converterDigito(1) + " " + resultado;
+				}
+			} else {
+				resultado = converterNumeroDeAte3Digitos(numero) + " " + sufixoPlural + resultado;
+			}
+		} else {
+			throw new Exception("O número deve estar no intervalo de 1 a 999.");
+		}
+		return resultado;
+	}
+
+	/**
+	 * Converte números de até 1 bilhão para extenso.
+	 * @param numero Número a ser convertido.
+	 * @return Número convertido para extenso.
+	 * @throws Exception Caso o número não esteja dentro do intervalo (0-1000000000)
+	 */
+	private static String converterNumeroQualquerPositivo(int numero) throws Exception {
+		String resultado = "";
+
+		// Trata dos últimos 3 digitos
+		int ultimos3digitos = numero%1000;
+		if (ultimos3digitos != 0) {
+			resultado = converterNumeroDeAte3Digitos(ultimos3digitos);
+		}
+		numero /= 1000;
+
+		// Trata dos outros digitos
+		String[] sufixos = {"mil","mil"};
+		int sufixo = 0;
+		while (numero > 0 && sufixo+1 < sufixos.length) {
+			if (numero%1000 != 0) {
+				resultado = converterNumeroParcialDeAte3DigitosComSufixo(numero%1000, sufixos[sufixo], sufixos[sufixo+1], ultimos3digitos) + resultado;
+				ultimos3digitos = numero%1000;
+			}
+			numero /= 1000;
+			sufixo += 2;
+		}
+		return resultado;
+	}
+
+	/**
 	 * Converte um número de até 1 bilhão para extenso.
 	 * @param numero Número a ser convertido.
 	 * @return Número convertido para extenso.
 	 */
 	public static String converter(int numero) {
 		try {
-			return converterNumeroDeAte3Digitos(numero);
+			if (numero == 0) {
+				return converterDigito(0);
+			}
+			return converterNumeroQualquerPositivo(numero);
 		} catch (Exception e) {
-			System.err.println("Não implementado ainda!");
+			System.err.println(e.getMessage());
 		}
 		return "";
 	}
