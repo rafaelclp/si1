@@ -12,7 +12,7 @@ public class InterfaceDeUsuario {
 		System.out.print("Informe um número: ");
 		do {
 			try {
-				int numero = Integer.parseInt(in.next().trim());
+				int numero = Integer.parseInt(in.nextLine().trim());
 				System.out.println(NumeroPorExtenso.converter(numero));
 				break;
 			} catch (Exception e) {
