@@ -50,10 +50,7 @@ public class NumeroPorExtenso {
 			numero %= 100;
 			if (numero != 0) {
 				String ultimos2digitos = converterNumeroDeAte2Digitos(numero);
-				if (!jaContemE(ultimos2digitos)) {
-					resultado += " e ";
-				}
-				resultado += ultimos2digitos;
+				resultado += " e " + ultimos2digitos;
 			}
 		}
 		return resultado;

@@ -81,6 +81,7 @@ public class NumeroPorExtensoTest {
 		assertEquals(NumeroPorExtenso.converter(118), "cento e dezoito");
 		assertEquals(NumeroPorExtenso.converter(119), "cento e dezenove");
 		assertEquals(NumeroPorExtenso.converter(120), "cento e vinte");
+		assertEquals(NumeroPorExtenso.converter(121), "cento e vinte e um");
 		assertEquals(NumeroPorExtenso.converter(200), "duzentos");
 		assertEquals(NumeroPorExtenso.converter(201), "duzentos e um");
 		assertEquals(NumeroPorExtenso.converter(300), "trezentos");
