@@ -99,4 +99,33 @@ public class NumeroPorExtensoTest {
 		assertEquals(NumeroPorExtenso.converter(900), "novecentos");
 		assertEquals(NumeroPorExtenso.converter(901), "novecentos e um");
 	}
+
+	@Test
+	public void numerosNaCasaDosMilhares() {
+		assertEquals(NumeroPorExtenso.converter(1000), "mil");
+		assertEquals(NumeroPorExtenso.converter(1001), "mil e um");
+		assertEquals(NumeroPorExtenso.converter(1011), "mil e onze");
+		assertEquals(NumeroPorExtenso.converter(1021), "mil e vinte e um");
+		assertEquals(NumeroPorExtenso.converter(1100), "mil e cem");
+		assertEquals(NumeroPorExtenso.converter(1121), "mil cento e vinte e um");
+		assertEquals(NumeroPorExtenso.converter(1101), "mil cento e um");
+		assertEquals(NumeroPorExtenso.converter(1111), "mil cento e onze");
+		assertEquals(NumeroPorExtenso.converter(2101), "dois mil cento e um");
+		assertEquals(NumeroPorExtenso.converter(2500), "dois mil e quinhentos");
+		assertEquals(NumeroPorExtenso.converter(3520), "três mil quinhentos e vinte");
+		assertEquals(NumeroPorExtenso.converter(4520), "quatro mil quinhentos e vinte");
+		assertEquals(NumeroPorExtenso.converter(5520), "cinco mil quinhentos e vinte");
+		assertEquals(NumeroPorExtenso.converter(6520), "seis mil quinhentos e vinte");
+		assertEquals(NumeroPorExtenso.converter(7520), "sete mil quinhentos e vinte");
+		assertEquals(NumeroPorExtenso.converter(8520), "oito mil quinhentos e vinte");
+		assertEquals(NumeroPorExtenso.converter(9520), "nove mil quinhentos e vinte");
+		assertEquals(NumeroPorExtenso.converter(10520), "dez mil quinhentos e vinte");
+		assertEquals(NumeroPorExtenso.converter(20520), "vinte mil quinhentos e vinte");
+		assertEquals(NumeroPorExtenso.converter(21520), "vinte e um mil quinhentos e vinte");
+		assertEquals(NumeroPorExtenso.converter(100000), "cem mil");
+		assertEquals(NumeroPorExtenso.converter(100001), "cem mil e um");
+		assertEquals(NumeroPorExtenso.converter(101000), "cento e um mil");
+		assertEquals(NumeroPorExtenso.converter(200000), "duzentos mil");
+		assertEquals(NumeroPorExtenso.converter(300000), "trezentos mil");
+	}
 }
