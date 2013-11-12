@@ -106,12 +106,12 @@ public class NumeroPorExtensoTest {
 		assertEquals(NumeroPorExtenso.converter(1001), "mil e um");
 		assertEquals(NumeroPorExtenso.converter(1011), "mil e onze");
 		assertEquals(NumeroPorExtenso.converter(1021), "mil e vinte e um");
-		assertEquals(NumeroPorExtenso.converter(1100), "mil e cem");
+		assertEquals(NumeroPorExtenso.converter(1100), "mil cem");
 		assertEquals(NumeroPorExtenso.converter(1121), "mil cento e vinte e um");
 		assertEquals(NumeroPorExtenso.converter(1101), "mil cento e um");
 		assertEquals(NumeroPorExtenso.converter(1111), "mil cento e onze");
 		assertEquals(NumeroPorExtenso.converter(2101), "dois mil cento e um");
-		assertEquals(NumeroPorExtenso.converter(2500), "dois mil e quinhentos");
+		assertEquals(NumeroPorExtenso.converter(2500), "dois mil quinhentos");
 		assertEquals(NumeroPorExtenso.converter(3520), "três mil quinhentos e vinte");
 		assertEquals(NumeroPorExtenso.converter(4520), "quatro mil quinhentos e vinte");
 		assertEquals(NumeroPorExtenso.converter(5520), "cinco mil quinhentos e vinte");
@@ -127,5 +127,23 @@ public class NumeroPorExtensoTest {
 		assertEquals(NumeroPorExtenso.converter(101000), "cento e um mil");
 		assertEquals(NumeroPorExtenso.converter(200000), "duzentos mil");
 		assertEquals(NumeroPorExtenso.converter(300000), "trezentos mil");
+	}
+
+	@Test
+	public void numerosNaCasaDosMilhoes() {
+		assertEquals(NumeroPorExtenso.converter(1000000), "um milhão");
+		assertEquals(NumeroPorExtenso.converter(1000001), "um milhão e um");
+		assertEquals(NumeroPorExtenso.converter(1000100), "um milhão cem");
+		assertEquals(NumeroPorExtenso.converter(1001000), "um milhão e mil");
+		assertEquals(NumeroPorExtenso.converter(1002000), "um milhão e dois mil");
+		assertEquals(NumeroPorExtenso.converter(1002724), "um milhão e dois mil setecentos e vinte e quatro");
+		assertEquals(NumeroPorExtenso.converter(1002074), "um milhão e dois mil e setenta e quatro");
+		assertEquals(NumeroPorExtenso.converter(2000000), "dois milhões");
+		assertEquals(NumeroPorExtenso.converter(2100000), "dois milhões cem mil");
+		assertEquals(NumeroPorExtenso.converter(2200000), "dois milhões duzentos mil");
+		assertEquals(NumeroPorExtenso.converter(2072012), "dois milhões e setenta e dois mil e doze");
+		assertEquals(NumeroPorExtenso.converter(924024012), "novecentos e vinte e quatro milhões e vinte e quatro mil e doze");
+		assertEquals(NumeroPorExtenso.converter(100124000), "cem milhões cento e vinte e quatro mil");
+		assertEquals(NumeroPorExtenso.converter(101124000), "cento e um milhões cento e vinte e quatro mil");
 	}
 }
