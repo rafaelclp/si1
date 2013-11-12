@@ -10,12 +10,28 @@ public class NumeroPorExtenso {
 	}
 	private static String converterNumeroDe2Digitos(int numero) throws Exception {
 		String[] numeros10A19 = {"dez", "onze", "doze", "treze", "catorze", "quinze", "dezesseis", "dezessete", "dezoito", "dezenove"};
-		if (numero < 10 || numero > 19) {
-			throw new Exception("Não implementado ainda!!");
-			// TODO: implementar numeros de 20 a 99
+		String[] dezenas = {"vinte", "trinta", "quarenta", "cinquenta", "sessenta", "setenta", "oitenta", "noventa"};
+
+		String resultado = "";
+		try {
+			if (numero < 10) {
+				resultado = converterDigito(numero);
+			} else if (numero <= 19) {
+				resultado = numeros10A19[numero-10];
+			} else if (numero <= 99) {
+				resultado = dezenas[numero/10-2];
+				if (numero%10 != 0) {
+					resultado += " e " + converterDigito(numero%10);
+				}
+			} else {
+				throw new Exception("O numero deve ser entre 0 e 99.");
+			}
+		} catch (Exception e) {
+			throw new Exception("O numero deve ser positivo.");
 		}
-		return numeros10A19[numero-10];
+		return resultado;
 	}
+
 	public static String converter(int numero) {
 		try {
 			if (numero < 10)
