@@ -1,6 +1,12 @@
 package NumeroPorExtenso;
 
 public class NumeroPorExtenso {
+	/**
+	 * Converte números de um dígito para extenso.
+	 * @param algarismo Um número inteiro de um dígito (0-9).
+	 * @return String com o número convertido para extenso.
+	 * @throws Exception Caso o número não esteja entre 0 e 9.
+	 */
 	private static String converterDigito(int algarismo) throws Exception {
 		String[] algarismos = {"zero", "um", "dois", "três", "quatro", "cinco", "seis", "sete", "oito", "nove"};
 		if (algarismo < 0 || algarismo > 9) {
@@ -8,6 +14,13 @@ public class NumeroPorExtenso {
 		}
 		return algarismos[algarismo];
 	}
+
+	/**
+	 * Converte números de até 2 digitos para extenso.
+	 * @param numero Número a ser convertido.
+	 * @return String com o número convertido para extenso.
+	 * @throws Exception Caso o número não esteja dentro dos limites (0-99).
+	 */
 	private static String converterNumeroDeAte2Digitos(int numero) throws Exception {
 		String[] numeros10A19 = {"dez", "onze", "doze", "treze", "catorze", "quinze", "dezesseis", "dezessete", "dezoito", "dezenove"};
 		String[] dezenas = {"vinte", "trinta", "quarenta", "cinquenta", "sessenta", "setenta", "oitenta", "noventa"};
@@ -32,10 +45,12 @@ public class NumeroPorExtenso {
 		return resultado;
 	}
 
-	private static boolean jaContemE(String numeroParcial) throws Exception {
-		return numeroParcial.contains(" e ");
-	}
-
+	/**
+	 * Converte números de até 3 dígitos para extenso.
+	 * @param numero Número a ser convertido.
+	 * @return String com o número convertido para extenso.
+	 * @throws Exception Caso o número não esteja dentro dos limites (0-999).
+	 */
 	private static String converterNumeroDeAte3Digitos(int numero) throws Exception {
 		String[] centenas = {"cento", "duzentos", "trezentos", "quatrocentos", "quinhentos", "seiscentos", "setecentos", "oitocentos", "novecentos"};
 
@@ -56,6 +71,11 @@ public class NumeroPorExtenso {
 		return resultado;
 	}
 
+	/**
+	 * Converte um número de até 1 bilhão para extenso.
+	 * @param numero Número a ser convertido.
+	 * @return Número convertido para extenso.
+	 */
 	public static String converter(int numero) {
 		try {
 			return converterNumeroDeAte3Digitos(numero);
