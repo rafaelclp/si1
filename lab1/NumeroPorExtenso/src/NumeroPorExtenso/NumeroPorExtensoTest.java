@@ -146,4 +146,20 @@ public class NumeroPorExtensoTest {
 		assertEquals(NumeroPorExtenso.converter(100124000), "cem milhões cento e vinte e quatro mil");
 		assertEquals(NumeroPorExtenso.converter(101124000), "cento e um milhões cento e vinte e quatro mil");
 	}
+
+	public void numerosNaCasaDosBilhoes() {
+		assertEquals(NumeroPorExtenso.converter(1000000000), "um bilhão");
+		assertEquals(NumeroPorExtenso.converter(1000000001), "um bilhão e um");
+		assertEquals(NumeroPorExtenso.converter(1000000100), "um bilhão cem");
+		assertEquals(NumeroPorExtenso.converter(1000001000), "um bilhão e mil");
+		assertEquals(NumeroPorExtenso.converter(1000002000), "um bilhão e dois mil");
+		assertEquals(NumeroPorExtenso.converter(1000002724), "um bilhão e dois mil setecentos e vinte e quatro");
+		assertEquals(NumeroPorExtenso.converter(1000002074), "um bilhão e dois mil e setenta e quatro");
+		assertEquals(NumeroPorExtenso.converter(2000000000), "dois bilhões");
+		assertEquals(NumeroPorExtenso.converter(2000100000), "dois bilhões cem mil");
+		assertEquals(NumeroPorExtenso.converter(2000200000), "dois bilhões duzentos mil");
+		assertEquals(NumeroPorExtenso.converter(2000072012), "dois bilhões e setenta e dois mil e doze");
+		assertEquals(NumeroPorExtenso.converter(2124072012), "dois bilhões cento e vinte e quatro milhões e setenta e dois mil e doze");
+		assertEquals(NumeroPorExtenso.converter(2024072012), "dois bilhões e vinte e quatro milhões e setenta e dois mil e doze");
+	}
 }
