@@ -15,6 +15,7 @@ public class Application extends Controller {
 	}
 
 	public static Result tasks() {
+		response().setContentType("text/html; charset=utf-8");
 		return ok(views.html.index.render(Task.all(), taskForm));
 	}
 

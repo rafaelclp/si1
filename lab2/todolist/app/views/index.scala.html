@@ -3,14 +3,15 @@
 @import helper._
 
 @main("Lista de tarefas a serem feitas") {
-    
+
     <h1>@tasks.size() tarefa(s)</h1>
     
     <ul>
         @for(task <- tasks) {
             <li>
-                @task.label
-                
+				<b>@task.label</b> (prioridade @task.priority), associada ao projeto @task.project<br />
+                @task.description
+
                 @form(routes.Application.deleteTask(task.id)) {
                     <input type="submit" value="Deletar">
                 }
@@ -21,8 +22,11 @@
     <h2>Adicionar uma nova tarefa</h2>
     
     @form(routes.Application.newTask()) {
-        
-        @inputText(taskForm("label")) 
+
+        @inputText(taskForm("label"), '_label -> "Nome da tarefa")
+        @inputText(taskForm("project"), '_label -> "Projeto associado")
+        @inputText(taskForm("description"), '_label -> "Resumo da tarefa") 
+        @inputText(taskForm("priority"), '_label -> "Prioridade")
         
         <input type="submit" value="Criar">
         
