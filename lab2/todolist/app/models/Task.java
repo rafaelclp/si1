@@ -1,18 +1,31 @@
 package models;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 
-import play.db.ebean.*;
-import play.db.ebean.Model.*;
-import play.data.validation.Constraints.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
-import javax.persistence.*;
+import play.data.validation.Constraints.Required;
+import play.db.ebean.Model;
 
 @Entity
-public class Task extends Model implements Comparable {
+@SuppressWarnings("serial")
+public class Task extends Model implements Comparable<Task> {
+	/**
+	 * Identificador da tarefa
+	 */
 	@Id
 	public Long id;
 
+	/**
+	 * Informa se a tarefa está completa ou não.
+	 */
+	public boolean completed = false;
+
+	/**
+	 * Chaves de uma tarefa requisitadas ao usuário.
+	 */
 	@Required
 	public String label;
 
@@ -25,29 +38,43 @@ public class Task extends Model implements Comparable {
 	@Required
 	public int priority;
 
-	public boolean completed = false;
-
+	/**
+	 * Permite realizar queries de busca ao banco de dados.
+	 */
 	public static Finder<Long, Task> find = new Finder<Long, Task>(Long.class,
 			Task.class);
 
+	/**
+	 * Retorna uma lista com todas as tarefas criadas.
+	 * 
+	 * @return Lista com as tarefas.
+	 */
 	public static List<Task> all() {
 		return find.all();
 	}
 
-	public int compareTo(Object other) {
+	/**
+	 * Compara esta a outra tarefa e informa se esta é menor (-1), igual (0)
+	 * ou maior (1). Consideramos menor a que tem menor prioridade.
+	 */
+	public int compareTo(Task other) {
 		int result = 0;
-		if (other.getClass() == getClass()) {
-			if (((Task)other).priority < priority) {
-				result = 1;
-			} else if (((Task)other).priority > priority) {
-				result = -1;
-			}
+		if (other.priority < priority) {
+			result = 1;
+		} else if (other.priority > priority) {
+			result = -1;
 		}
 		return result;
 	}
 
-	public static List<Task> allSortedByPriority() {
-		List<Task> tasksList = all();
+	/**
+	 * Ordena uma lista de tarefas pela prioridade.
+	 * 
+	 * @param tasksList
+	 *            Lista a ser ordenada.
+	 * @return Referência para a lista ordenada.
+	 */
+	public static List<Task> sortByPriority(List<Task> tasksList) {
 		Task[] tasks = new Task[tasksList.size()];
 		tasksList.toArray(tasks);
 		Arrays.sort(tasks);
@@ -57,6 +84,13 @@ public class Task extends Model implements Comparable {
 		return tasksList;
 	}
 
+	/**
+	 * Procura uma tarefa pelo id.
+	 * 
+	 * @param id
+	 *            Id da tarefa que se deseja encontrar.
+	 * @return Uma referência para a tarefa, caso exista, ou null.
+	 */
 	public static Task find(Long id) {
 		Task result = null;
 		List<Task> tasks = all();
@@ -69,11 +103,26 @@ public class Task extends Model implements Comparable {
 		return result;
 	}
 
+	/**
+	 * Salva uma tarefa no banco de dados.
+	 * 
+	 * @param task
+	 *            A tarefa a ser salva.
+	 */
 	public static void create(Task task) {
 		task.save();
 	}
 
+	/**
+	 * Remove uma tarefa do banco de dados, caso exista.
+	 * 
+	 * @param id
+	 *            Id da tarefa a ser removida.
+	 */
 	public static void delete(Long id) {
-		find.ref(id).delete();
+		try {
+			find.ref(id).delete();
+		} catch (Exception e) {
+		}
 	}
 }

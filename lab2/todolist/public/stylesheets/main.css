@@ -22,10 +22,18 @@ label {
     font-weight: bold;
 }
 
+input {
+    border: 2px solid black;
+}
+
 input[type=button], input[type=submit] {
     width: 150px;
     float: left;
     margin-right: 3px;
+}
+
+input[type=text] {
+    width: 200px;
 }
 
 ul {
@@ -50,10 +58,6 @@ div.description {
     border-radius: 15px;
     background: #ddd;
     border: 2px solid #303030;
-}
-
-input {
-    border: 2px solid black;
 }
 
 .info {
