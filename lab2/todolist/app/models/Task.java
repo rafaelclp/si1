@@ -25,11 +25,23 @@ public class Task extends Model {
 	@Required
 	public int priority;
 
+	public boolean completed = false;
+
 	public static Finder<Long, Task> find = new Finder<Long, Task>(Long.class,
 			Task.class);
 
 	public static List<Task> all() {
 		return find.all();
+	}
+
+	public static Task find(Long id) {
+		List<Task> tasks = all();
+		for (Task task : tasks) {
+			if (task.id == id) {
+				return task;
+			}
+		}
+		return null;
 	}
 
 	public static void create(Task task) {

@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.List;
+
 import models.*;
 import play.*;
 import play.data.*;
@@ -30,6 +32,13 @@ public class Application extends Controller {
 
 	public static Result deleteTask(Long id) {
 		Task.delete(id);
+		return redirect(routes.Application.tasks());
+	}
+
+	public static Result toggleCompletedTask(Long id) {
+		Task task = Task.find(id);
+		task.completed = !task.completed;
+		task.update();
 		return redirect(routes.Application.tasks());
 	}
 }
