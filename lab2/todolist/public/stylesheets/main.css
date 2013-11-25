@@ -1,27 +1,76 @@
 body {
     font-family: Helvetica, Arial;
     font-weight: lighter;
-    text-align: center;
 }
 
 h1 {
     color: #333;
+    margin: 0px;
+    margin-top: 10px;
+    border-bottom: 1px dotted #505050;
+}
+
+h2 {
+    color: #202020;
+    margin: 0px;
+    margin-bottom: 5px;
+    text-decoration: underline;
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type=button], input[type=submit] {
+    width: 150px;
+    float: left;
+    margin-right: 3px;
+}
+
+ul {
+    list-style-type: circle;
+    list-style-position: inside;
+}
+
+span.label, span.project {
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+div.description {
+    padding-left: 15px;
+    padding-top: 3px;
+    padding-right: 15px;
+    padding-bottom: 3px;
+    margin-bottom: 2px;
+    margin-top: 1px;
+    width: 500px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    background: #ddd;
+    border: 2px solid #303030;
+}
+
+input {
+    border: 2px solid black;
+}
+
+.info {
+    display: none;
 }
 
 p {
     color: #666;
 }
 
-#clock {
-    display: block;
-    margin: 50px auto;
-    width: 800px;
+div#logo {
+    width: 100%;
     text-align: center;
 }
 
-#clock span {
+div#logo span {
     position: relative;
-    font-size: 64px;
+    font-size: 48px;
     display: inline-block;
     background: #222;
     margin-right: 3px;
@@ -42,20 +91,4 @@ p {
     	color-stop(0.33, rgb(23,21,21)),
     	color-stop(0.7, rgb(46,45,44))
     );
-}
-
-#clock span:before {
-    content: '–';
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 48%;
-    bottom: 51%;
-    text-indent: -999em;
-    color: #000;
-    background: #000;
-}
-
-#comet {
-    display: none;
 }
