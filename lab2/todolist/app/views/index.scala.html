@@ -18,7 +18,7 @@
             </li>
         }
     </ul>
-    
+
     <h2>Adicionar uma nova tarefa</h2>
     
     @form(routes.Application.newTask()) {
@@ -27,7 +27,7 @@
         @inputText(taskForm("project"), '_label -> "Projeto associado")
         @inputText(taskForm("description"), '_label -> "Resumo da tarefa") 
         @inputText(taskForm("priority"), '_label -> "Prioridade")
-        
+
         <input type="submit" value="Criar">
         
     }
