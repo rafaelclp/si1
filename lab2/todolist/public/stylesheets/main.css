@@ -24,6 +24,7 @@ label {
 
 input {
     border: 2px solid black;
+	border-radius: 10px;
 }
 
 input[type=button], input[type=submit] {
@@ -34,6 +35,8 @@ input[type=button], input[type=submit] {
 
 input[type=text] {
     width: 200px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 ul {
